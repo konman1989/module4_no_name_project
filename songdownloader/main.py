@@ -25,7 +25,6 @@ parser.add_argument(
 
 
 args = parser.parse_args()
-print(args)
 
 if len(args.country) != 2:
     raise NameError("Country length should equal 2")
@@ -46,11 +45,3 @@ with open(f'{args.artist}.json', 'w') as file:
         })
 
     file.write(json.dumps(json_data, indent=2))
-print(response)
-
-#"artistName"
-#"trackName"
-#"country"
-#"primaryGenreName"
-#"trackExplicitness"
-#"artworkUrl100"
