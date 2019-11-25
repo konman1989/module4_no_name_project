@@ -38,20 +38,20 @@ class DataBase:
                 new_list.append(num)
             return new_list[0:limit]
 
-    # def id_creator(self):
-    #     with open('Database.json', 'r') as ids:
-    #         id_json = json.load(ids)
-    #         tables_list = id_json['tables']
-    #         id_list = []
-    #         id_ = 0
-    #         for table in tables_list.values():
-    #             id_list.append(table['id'])
-    #         if id_list[-1] == 'int':
-    #             id_ = 0
-    #         else:
-    #             id_ = id_list[-1] + 1
-    #         print(id_)
-    #         return id_
+#        def id_creator(self):
+#         with open('Database.json', 'r') as ids:
+#             tables_list = json.load(ids)['data']
+#             id_list = []
+#             id_ = 0
+#             for table in tables_list.values():
+#                 for dict1 in table:
+#                     id_list.append(dict1.get('id'))
+#             if id_list[-1] != 'int' and id_list[-1] is not None:
+#                 id_ = id_list[-1] + 1
+#             else:
+#                 id_ = 0
+#             print(id_)
+#             return id_
 
     @staticmethod
     def compare_databases(database, json_data):
