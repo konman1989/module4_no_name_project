@@ -34,7 +34,7 @@ def add_song_text(author, song):
     with open("Database.json", "r") as file:
         content = json.load(file)
         for key in content['data']['Songs']:
-            if key['artist'] == author:
+            if key['artist'] == author and key['name'] == song:
                 key['Lyrics'] = text
 
     with open("Database.json", "w") as file1:
@@ -63,4 +63,4 @@ def to_file(author, song):
 if __name__ == "__main__":
     to_file('Nirvana', 'In Bloom')
     to_file('Adele', 'Hello')
-    add_song_text('Nirvana', 'In Bloom')
+    add_song_text('Adele', 'Hello')
