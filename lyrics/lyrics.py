@@ -26,7 +26,22 @@ parser.add_argument('-d', '--to_db', type=str, default=None)
 args = parser.parse_args()
 
 
-def to_file(author, song, path):
+def add_song_text(author, song):
+
+    """If a song exists in json file, adds text in key['Lyrics']"""
+
+    text = fetch_lyrics(author, song)
+    with open("Database.json", "r") as file:
+        content = json.load(file)
+        for key in content['data']['Songs']:
+            if key['artist'] == author:
+                key['Lyrics'] = text
+
+    with open("Database.json", "w") as file1:
+        json.dump(content, file1, indent=2)
+
+
+def to_file(author, song):
 
     """Checks if the song is already in JSON file, copies song text
     and saves it to a .txt file. If the text does not exist yet,
@@ -41,10 +56,11 @@ def to_file(author, song, path):
             else:
                 text_to_download = fetch_lyrics(author, song)
 
-    with open(f'{path}/{author}_{song}.txt', "w") as file:
+    with open(f"{author}_{song}.txt", "w") as file:
         file.write(f'{author}\n{text_to_download}')
 
 
 if __name__ == "__main__":
-    to_file('Nirvana', 'In Bloom', '')
-    to_file('Adele', 'Hello', '')
+    to_file('Nirvana', 'In Bloom')
+    to_file('Adele', 'Hello')
+    add_song_text('Nirvana', 'In Bloom')
