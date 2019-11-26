@@ -1,6 +1,6 @@
 import argparse
-import requests
 import json
+import requests
 from bs4 import BeautifulSoup
 
 
@@ -14,15 +14,6 @@ def fetch_lyrics(author, song):
     content = soup.find('p').text
 
     return content
-
-
-parser = argparse.ArgumentParser()
-parser.add_argument('-a', '--artist', type=str, default=None)
-parser.add_argument('-s', '--song', type=str, default=None)
-parser.add_argument('-f', '--to_file', type=str, default=None)
-parser.add_argument('-d', '--to_db', type=str, default=None)
-
-args = parser.parse_args()
 
 
 def add_song_text(author, song):
@@ -63,3 +54,23 @@ if __name__ == "__main__":
     to_file('Nirvana', 'In Bloom')
     to_file('Adele', 'Hello')
     add_song_text('Adele', 'Hello')
+
+    parser = argparse.ArgumentParser()
+
+    parser.add_argument('-a',
+                        '--artist',
+                        type=str,
+                        default=None)
+    parser.add_argument('-s',
+                        '--song',
+                        type=str,
+                        default=None)
+    parser.add_argument('-f',
+                        '--to_file',
+                        type=str,
+                        default=None)
+    parser.add_argument('-d', '--to_db',
+                        type=str,
+                        default=None)
+
+    args = parser.parse_args()
