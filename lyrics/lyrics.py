@@ -11,7 +11,6 @@ def fetch_lyrics(author, song):
     result = requests.get(url).text
 
     soup = BeautifulSoup(result, "html.parser")
-
     content = soup.find('p').text
 
     return content
@@ -34,7 +33,7 @@ def add_song_text(author, song):
     with open("Database.json", "r") as file:
         content = json.load(file)
         for key in content['data']['Songs']:
-            if key['artist'] == author:
+            if key['artist'] == author and key['name'] == song:
                 key['Lyrics'] = text
 
     with open("Database.json", "w") as file1:
@@ -51,7 +50,7 @@ def to_file(author, song):
         content = json.load(file)
         for key in content['data']['Songs']:
             if key['artist'] == author and key['name'] == song:
-                if key['Lyrics'] != 'text':
+                if key['lyrics'] != 'text':
                     text_to_download = key['Lyrics']
             else:
                 text_to_download = fetch_lyrics(author, song)
@@ -63,4 +62,4 @@ def to_file(author, song):
 if __name__ == "__main__":
     to_file('Nirvana', 'In Bloom')
     to_file('Adele', 'Hello')
-    add_song_text('Nirvana', 'In Bloom')
+    add_song_text('Adele', 'Hello')
