@@ -1,5 +1,6 @@
 import argparse
 import requests
+import json
 from bs4 import BeautifulSoup
 
 
@@ -16,8 +17,6 @@ def fetch_lyrics(author, song):
     return content
 
 
-print(fetch_lyrics('Kendrick Lamar', 'Humble'))
-
 parser = argparse.ArgumentParser()
 parser.add_argument('-a', '--artist', type=str, default=None)
 parser.add_argument('-s', '--song', type=str, default=None)
@@ -27,16 +26,25 @@ parser.add_argument('-d', '--to_db', type=str, default=None)
 args = parser.parse_args()
 
 
-def to_file(artist, song, path):
-    with open(f'{path}/{artist}_{song}.txt', "w") as file:
-        file.write(f'{artist}\n{fetch_lyrics(artist, song)}')
+def to_file(author, song, path):
+
+    """Checks if the song is already in JSON file, copies song text
+    and saves it to a .txt file. If the text does not exist yet,
+    parses it, adds to data base and to file"""
+
+    with open("Database.json", "r") as file:
+        content = json.load(file)
+        for key in content['data']['Songs']:
+            if key['artist'] == author and key['name'] == song:
+                if key['Lyrics'] != 'text':
+                    text_to_download = key['Lyrics']
+            else:
+                text_to_download = fetch_lyrics(author, song)
+
+    with open(f'{path}/{author}_{song}.txt', "w") as file:
+        file.write(f'{author}\n{text_to_download}')
 
 
-to_file(args.artist, args.song, args.to_file)
-
-
-# def to_db(author, song, song_id):
-#     return fetch_lyrics()
-
-
-
+if __name__ == "__main__":
+    to_file('Nirvana', 'In Bloom', '')
+    to_file('Adele', 'Hello', '')
