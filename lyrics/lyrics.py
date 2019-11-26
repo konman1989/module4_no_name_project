@@ -11,7 +11,6 @@ def fetch_lyrics(author, song):
     result = requests.get(url).text
 
     soup = BeautifulSoup(result, "html.parser")
-
     content = soup.find('p').text
 
     return content
