@@ -50,7 +50,7 @@ def to_file(author, song):
         content = json.load(file)
         for key in content['data']['Songs']:
             if key['artist'] == author and key['name'] == song:
-                if key['Lyrics'] != 'text':
+                if key['lyrics'] != 'text':
                     text_to_download = key['Lyrics']
             else:
                 text_to_download = fetch_lyrics(author, song)
