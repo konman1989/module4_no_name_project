@@ -1,92 +1,92 @@
+import os
 import json
 
 
 class DataBase:
     def __init__(self):
-        self.database = {'tables': {}, 'data': {}}
         self.field_types = {
             'int': int,
             'str': str,
             'boolean': bool}
 
-    def add_tables(self, name: str, parameters: dict):
-        if name not in self.database['tables']:
-            self.database['tables'].update({name: parameters})
-
-    def add_data(self, table_name: str, data: dict):
-        keys_checked = 0
-        for n in data.keys():
-            if n in self.database['tables'][table_name].keys():
-                if type(data[n]) == \
-                        self.field_types[self.database[
-                            'tables'][table_name][n]]:
-                    keys_checked += 1
-        if keys_checked == len(data.keys()):
-            if table_name in self.database['data']:
-
-                self.database['data'][table_name].append(data)
-            else:
-                self.database['data'].update({f'{table_name}': []})
-                self.database['data'][table_name].append(data)
-
-    def select(self, table: str, limit: int = None):
-        with open('Database.json', 'r') as db:
-            dict_list1 = json.load(db)
-            dict_list = dict_list1['data'][table]
-            new_list = []
-            for num in dict_list:
-                new_list.append(num)
-            return new_list[0:limit]
-
-#        def id_creator(self):
-#         with open('Database.json', 'r') as ids:
-#             tables_list = json.load(ids)['data']
-#             id_list = []
-#             id_ = 0
-#             for table in tables_list.values():
-#                 for dict1 in table:
-#                     id_list.append(dict1.get('id'))
-#             if id_list[-1] != 'int' and id_list[-1] is not None:
-#                 id_ = id_list[-1] + 1
-#             else:
-#                 id_ = 0
-#             print(id_)
-#             return id_
-
-    @staticmethod
-    def compare_databases(database, json_data):
-        for key in database['tables'].keys():
-            if key not in json_data['tables'].keys():
-                json_data['tables'].update({key: database[key]})
-        for key in database['data'].keys():
-            if key not in json_data['data'].keys():
-                json_data['data'].update({key: database[key]})
-            for item in database['data'][key]:
-                if item not in json_data['data'][key]:
-                    json_data['data'][key].append(item)
-        return json_data
-
-    def to_json(self):
+    @property
+    def database(self):
+        if not os.path.exists('Database.json'):
+            file = open('Database.json', 'w')
+            file.close()
         with open('Database.json', 'r') as file:
             try:
                 data = json.load(file)
             except json.decoder.JSONDecodeError:
-                with open('Database.json', 'w') as file1:
-                    json.dump(self.database, file1, indent=2)
-                    return
-            data = self.compare_databases(self.database, data)
-            with open('Database.json', 'w') as file1:
-                json.dump(data, file1, indent=2)
+                data = {'tables': {}, 'data': {}}
+            return data
+
+    def id_creator(self, table_name):
+        try:
+            table_contents = self.database['data'][table_name]
+            return table_contents[-1]['id'] + 1
+        except KeyError:
+            return 0
+
+    def add_tables(self, name: str, parameters: dict):
+        data = self.database
+        if name not in data['tables']:
+            data['tables'].update({name: parameters})
+        self.to_json(data)
+
+    def add_data(self, table_name: str, parameters: dict):
+        data = self.database
+        keys_checked = 0
+        for n in parameters:
+            if n in data['tables'][table_name]:
+                if type(parameters[n]) == \
+                        self.field_types[data[
+                            'tables'][table_name][n]]:
+                    keys_checked += 1
+        if keys_checked == len(parameters):
+            try:
+                objects = [n['name'] for n in self.database['data'][table_name]]
+            except KeyError:
+                objects = []
+            if parameters['name'] not in objects:
+                if table_name in data['data']:
+                    parameters = {'id': self.id_creator(table_name), **parameters}
+                    data['data'][table_name].append(parameters)
+                else:
+                    data['data'].update({f'{table_name}': []})
+                    parameters = {'id': self.id_creator(table_name), **parameters}
+                    data['data'][table_name].append(parameters)
+        self.to_json(data)
+
+    @staticmethod
+    def select(table: str, limit: int = None, **filters):
+        with open('Database.json', 'r') as db:
+            dict_list = json.load(db)['data'][table]
+            new_list = []
+            for el in dict_list:
+                if filters == {}:
+                    new_list.append(el)
+                for fil in filters.items():
+                    if fil[1] != el[fil[0]]:
+                        break
+                    elif el not in new_list:
+                        new_list.append(el)
+            if limit is None:
+                return new_list
+            else:
+                return new_list[0:limit]
+
+    def to_json(self, data):
+        with open('Database.json', 'w') as file1:
+            json.dump(data, file1, indent=2)
 
 
 DB = DataBase()
 DB.add_tables('Songs', {'id': 'int', 'name': 'str', 'lyrics': 'str'})
-DB.add_data('Songs', {'id': 1001, 'name': 'In Bloom', 'lyrics': 'test'})
-DB.add_data('Songs', {'id': 1002, 'name': 'Wild', 'lyrics': 'test'})
-DB.to_json()
-DB.add_data('Songs', {'id': 1003, 'name': 'Nobody', 'lyrics': 'test'})
-DB.add_data('Songs', {'id': 1004, 'name': 'No Plan', 'lyrics': 'test'})
-DB.to_json()
-DB.add_data('Songs', {'id': 1005, 'name': 'Almost', 'lyrics': 'test'})
-DB.to_json()
-
+DB.add_data('Songs', {'name': 'Nobody', 'lyrics': 'test'})
+DB.add_data('Songs', {'name': 'No Plan', 'lyrics': 'test'})
+DB.add_data('Songs', {'name': 'Almost', 'lyrics': 'test'})
+DB.add_data('Songs', {'name': 'Jackie and Wilson', 'lyrics': 'test'})
+DB.add_data('Songs', {'name': 'Cherry Wine', 'lyrics': 'test'})
+DB.add_data('Songs', {'name': 'R U Mine?', 'lyrics': 'test'})
+print(DB.select('Songs', name='Cherry Wine', lyrics='test'))
