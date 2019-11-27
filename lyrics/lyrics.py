@@ -25,7 +25,7 @@ def add_song_text(author, song):
         content = json.load(file)
         for key in content['data']['Songs']:
             if key['artist'] == author and key['name'] == song:
-                key['Lyrics'] = text
+                key['lyrics'] = text
 
     with open("Database.json", "w") as file1:
         json.dump(content, file1, indent=2)
@@ -42,18 +42,19 @@ def to_file(author, song):
         for key in content['data']['Songs']:
             if key['artist'] == author and key['name'] == song:
                 if key['lyrics'] != 'text':
-                    text_to_download = key['Lyrics']
+                    text_to_download = key['lyrics']
             else:
                 text_to_download = fetch_lyrics(author, song)
 
     with open(f"{author}_{song}.txt", "w") as file:
-        file.write(f'{author}\n{text_to_download}')
+        file.write(f'{text_to_download}')
 
 
 if __name__ == "__main__":
     to_file('Nirvana', 'In Bloom')
     to_file('Adele', 'Hello')
     add_song_text('Adele', 'Hello')
+    add_song_text('Nirvana', 'In Bloom')
 
     parser = argparse.ArgumentParser()
 
