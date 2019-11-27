@@ -81,12 +81,13 @@ class DataBase:
             json.dump(data, file1, indent=2)
 
 
-DB = DataBase()
-DB.add_tables('Songs', {'id': 'int', 'name': 'str', 'lyrics': 'str'})
-DB.add_data('Songs', {'name': 'Nobody', 'lyrics': 'test'})
-DB.add_data('Songs', {'name': 'No Plan', 'lyrics': 'test'})
-DB.add_data('Songs', {'name': 'Almost', 'lyrics': 'test'})
-DB.add_data('Songs', {'name': 'Jackie and Wilson', 'lyrics': 'test'})
-DB.add_data('Songs', {'name': 'Cherry Wine', 'lyrics': 'test'})
-DB.add_data('Songs', {'name': 'R U Mine?', 'lyrics': 'test'})
-print(DB.select('Songs', name='Cherry Wine', lyrics='test'))
+if __name__ == "__main__":
+    DB = DataBase()
+    DB.add_tables('Songs', {'id': 'int', 'name': 'str', 'lyrics': 'str'})
+    DB.add_data('Songs', {'name': 'Nobody', 'lyrics': 'test'})
+    DB.add_data('Songs', {'name': 'No Plan', 'lyrics': 'test'})
+    DB.add_data('Songs', {'name': 'Almost', 'lyrics': 'test'})
+    DB.add_data('Songs', {'name': 'Jackie and Wilson', 'lyrics': 'test'})
+    DB.add_data('Songs', {'name': 'Cherry Wine', 'lyrics': 'test'})
+    DB.add_data('Songs', {'name': 'R U Mine?', 'lyrics': 'test'})
+    print(DB.select('Songs', name='Cherry Wine', lyrics='test'))
