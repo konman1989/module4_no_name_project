@@ -1,5 +1,5 @@
 import unittest
-from lyrics import fetch_lyrics, to_file
+from lyrics.lyrics import fetch_lyrics, to_file
 
 
 class TestLyrics(unittest.TestCase):
