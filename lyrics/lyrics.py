@@ -75,3 +75,5 @@ if __name__ == "__main__":
                         default=None)
 
     args = parser.parse_args()
+
+    # TODO - change parameters in final version to args.

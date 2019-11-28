@@ -1,0 +1,48 @@
+{
+  "tables": {
+    "Users": {
+      "id": "int",
+      "name": "str",
+      "age": "int"
+    },
+    "Songs": {
+      "id": "int",
+      "artist": "str",
+      "name": "str",
+      "lyrics": "str"
+    }
+  },
+  "data": {
+    "Songs": [
+      {
+        "id": 1001,
+        "artist": "Nirvana",
+        "name": "In Bloom",
+        "lyrics": "[Verse 1]\nSell the kids for food\nWeather changes moods\nSpring is here again\nReproductive glands\n\n[Chorus]\nHe's the one who likes all our pretty songs\nAnd he likes to sing along\nAnd he likes to shoot his gun\nBut he knows not what it means\nKnows not what it means\nAnd I say he's the one\nWho likes all our pretty songs\nAnd he likes to sing along\nAnd he likes to shoot his gun\nBut he knows not what it means\nKnows not what it means and I say yeah\n\n[Verse 2]\nWe can have some more\nNature is a whore\nBruises on the fruit\nTender age in bloom\n\n[Chorus]\nHe's the one who likes all our pretty songs\nAnd he likes to sing along\nAnd he likes to shoot his gun\nBut he he knows not what it means\nKnows not what it means\nAnd I say\nHe's the one who likes all our pretty songs\nAnd he likes to sing along\nAnd he likes to shoot his gun\nBut he knows not what it means\nKnows not what it means and I say yeah\n\n[Guitar Solo]\n\n[Chorus]\nHe's the one who likes all our pretty songs\nAnd he likes to sing along\nAnd he likes to shoot his gun\nBut he knows not what it means\nKnows not what it means\nAnd I say he's the one\nWho likes all our pretty songs\nAnd he likes to sing along\nAnd he likes to shoot his gun\nBut he knows not what it means\nKnows not what it means\nKnows not what it means\nKnows not what it means and I say yeah"
+      },
+      {
+        "id": 1001,
+        "artist": "Nirvana",
+        "name": "In Bloom",
+        "lyrics": "[Verse 1]\nSell the kids for food\nWeather changes moods\nSpring is here again\nReproductive glands\n\n[Chorus]\nHe's the one who likes all our pretty songs\nAnd he likes to sing along\nAnd he likes to shoot his gun\nBut he knows not what it means\nKnows not what it means\nAnd I say he's the one\nWho likes all our pretty songs\nAnd he likes to sing along\nAnd he likes to shoot his gun\nBut he knows not what it means\nKnows not what it means and I say yeah\n\n[Verse 2]\nWe can have some more\nNature is a whore\nBruises on the fruit\nTender age in bloom\n\n[Chorus]\nHe's the one who likes all our pretty songs\nAnd he likes to sing along\nAnd he likes to shoot his gun\nBut he he knows not what it means\nKnows not what it means\nAnd I say\nHe's the one who likes all our pretty songs\nAnd he likes to sing along\nAnd he likes to shoot his gun\nBut he knows not what it means\nKnows not what it means and I say yeah\n\n[Guitar Solo]\n\n[Chorus]\nHe's the one who likes all our pretty songs\nAnd he likes to sing along\nAnd he likes to shoot his gun\nBut he knows not what it means\nKnows not what it means\nAnd I say he's the one\nWho likes all our pretty songs\nAnd he likes to sing along\nAnd he likes to shoot his gun\nBut he knows not what it means\nKnows not what it means\nKnows not what it means\nKnows not what it means and I say yeah"
+      },
+      {
+        "id": 1001,
+        "artist": "Nirvana",
+        "name": "In Bloom",
+        "lyrics": "[Verse 1]\nSell the kids for food\nWeather changes moods\nSpring is here again\nReproductive glands\n\n[Chorus]\nHe's the one who likes all our pretty songs\nAnd he likes to sing along\nAnd he likes to shoot his gun\nBut he knows not what it means\nKnows not what it means\nAnd I say he's the one\nWho likes all our pretty songs\nAnd he likes to sing along\nAnd he likes to shoot his gun\nBut he knows not what it means\nKnows not what it means and I say yeah\n\n[Verse 2]\nWe can have some more\nNature is a whore\nBruises on the fruit\nTender age in bloom\n\n[Chorus]\nHe's the one who likes all our pretty songs\nAnd he likes to sing along\nAnd he likes to shoot his gun\nBut he he knows not what it means\nKnows not what it means\nAnd I say\nHe's the one who likes all our pretty songs\nAnd he likes to sing along\nAnd he likes to shoot his gun\nBut he knows not what it means\nKnows not what it means and I say yeah\n\n[Guitar Solo]\n\n[Chorus]\nHe's the one who likes all our pretty songs\nAnd he likes to sing along\nAnd he likes to shoot his gun\nBut he knows not what it means\nKnows not what it means\nAnd I say he's the one\nWho likes all our pretty songs\nAnd he likes to sing along\nAnd he likes to shoot his gun\nBut he knows not what it means\nKnows not what it means\nKnows not what it means\nKnows not what it means and I say yeah"
+      },
+      {
+        "id": 1001,
+        "artist": "Nirvana",
+        "name": "In Bloom",
+        "lyrics": "[Verse 1]\nSell the kids for food\nWeather changes moods\nSpring is here again\nReproductive glands\n\n[Chorus]\nHe's the one who likes all our pretty songs\nAnd he likes to sing along\nAnd he likes to shoot his gun\nBut he knows not what it means\nKnows not what it means\nAnd I say he's the one\nWho likes all our pretty songs\nAnd he likes to sing along\nAnd he likes to shoot his gun\nBut he knows not what it means\nKnows not what it means and I say yeah\n\n[Verse 2]\nWe can have some more\nNature is a whore\nBruises on the fruit\nTender age in bloom\n\n[Chorus]\nHe's the one who likes all our pretty songs\nAnd he likes to sing along\nAnd he likes to shoot his gun\nBut he he knows not what it means\nKnows not what it means\nAnd I say\nHe's the one who likes all our pretty songs\nAnd he likes to sing along\nAnd he likes to shoot his gun\nBut he knows not what it means\nKnows not what it means and I say yeah\n\n[Guitar Solo]\n\n[Chorus]\nHe's the one who likes all our pretty songs\nAnd he likes to sing along\nAnd he likes to shoot his gun\nBut he knows not what it means\nKnows not what it means\nAnd I say he's the one\nWho likes all our pretty songs\nAnd he likes to sing along\nAnd he likes to shoot his gun\nBut he knows not what it means\nKnows not what it means\nKnows not what it means\nKnows not what it means and I say yeah"
+      }
+    ],
+    "Users": [
+      {
+        "name": "Steve"
+      }
+    ]
+  }
+}
