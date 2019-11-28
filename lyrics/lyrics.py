@@ -54,9 +54,9 @@ def to_file(author, song):
 
 if __name__ == "__main__":
     to_file('Nirvana', 'In Bloom')
-    # to_file('Adele', 'Hello')
-    # add_song_text('Adele', 'Hello')
-    # add_song_text('Nirvana', 'In Bloom')
+    to_file('Adele', 'Hello')
+    add_song_text('Adele', 'Hello')
+    add_song_text('Nirvana', 'In Bloom')
 
     parser = argparse.ArgumentParser()
 
