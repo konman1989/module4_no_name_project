@@ -26,11 +26,14 @@ parser.add_argument(
 
 args = parser.parse_args()
 
-if len(args.country) != 2:
-    raise NameError("Country length should equal 2")
-
-response = requests.get(f"https://itunes.apple.com/search?term={args.artist}&"
+if args.country is not None:
+    if len(args.country) != 2:
+        raise NameError("Country length should equal 2")
+    response = requests.get(f"https://itunes.apple.com/search?term={args.artist}&"
                         f"country={args.country}&limit={args.limit}").json()
+else:
+    response = requests.get(
+        f"https://itunes.apple.com/search?term={args.artist}&limit={args.limit}").json()
 
 with open(f'{args.artist}.json', 'w') as file:
     json_data = []
@@ -45,3 +48,4 @@ with open(f'{args.artist}.json', 'w') as file:
         })
 
     file.write(json.dumps(json_data, indent=2))
+
