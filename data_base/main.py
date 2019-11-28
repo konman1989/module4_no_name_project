@@ -68,6 +68,8 @@ class DataBase:
                     new_list.append(el)
                 for fil in filters.items():
                     if fil[1] != el[fil[0]]:
+                        if el in new_list:
+                            new_list.remove(el)
                         break
                     elif el not in new_list:
                         new_list.append(el)
