@@ -2,9 +2,10 @@ import argparse
 import json
 import requests
 from bs4 import BeautifulSoup
+from typing import Union
 
 
-def fetch_lyrics(author, song):
+def fetch_lyrics(author: str, song: str) -> str:
     author = author.replace(" ", "-")
     song = song.replace(" ", "-")
     url = f'https://genius.com/{author}-{song}-lyrics'
@@ -16,35 +17,41 @@ def fetch_lyrics(author, song):
     return content
 
 
-def add_song_text(author, song):
+def add_song_text(author: str, song: str) -> Union[None or list]:
 
-    """If a song exists in json file, adds text in key['Lyrics']"""
+    """If a song exists in json file, adds text in key['lyrics']"""
 
     text = fetch_lyrics(author, song)
-    with open("Database.json", "r") as file:
+    with open("../data_base/Database.json", "r") as file:
         content = json.load(file)
         for key in content['data']['Songs']:
             if key['artist'] == author and key['name'] == song:
                 key['lyrics'] = text
+                # breaks the loop if the song was found
+                break
+        else:
+            return []
 
-    with open("Database.json", "w") as file1:
+    with open("../data_base/Database.json", "w") as file1:
         json.dump(content, file1, indent=2)
 
 
-def to_file(author, song):
+def to_file(author: str, song: str) -> None:
 
     """Checks if the song is already in JSON file, copies song text
     and saves it to a .txt file. If the text does not exist yet,
     parses it, adds to data base and to file"""
 
-    with open("Database.json", "r") as file:
+    with open("../data_base/Database.json", "r") as file:
         content = json.load(file)
         for key in content['data']['Songs']:
             if key['artist'] == author and key['name'] == song:
-                if key['lyrics'] != 'text':
+                if len(key['lyrics']) > 10:
                     text_to_download = key['lyrics']
             else:
                 text_to_download = fetch_lyrics(author, song)
+                # if the song is not in DB we save it there
+                add_song_text(author, song)
 
     with open(f"{author}_{song}.txt", "w") as file:
         file.write(f'{text_to_download}')
@@ -53,6 +60,7 @@ def to_file(author, song):
 if __name__ == "__main__":
     to_file('Nirvana', 'In Bloom')
     to_file('Adele', 'Hello')
+    to_file('Nirvana', 'Lithium')
     add_song_text('Adele', 'Hello')
     add_song_text('Nirvana', 'In Bloom')
 
