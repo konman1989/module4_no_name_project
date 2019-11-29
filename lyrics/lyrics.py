@@ -1,6 +1,7 @@
 import argparse
 import json
 import requests
+from data_base.main import DataBase
 from bs4 import BeautifulSoup
 from typing import Union
 
@@ -42,16 +43,14 @@ def to_file(author: str, song: str) -> None:
     and saves it to a .txt file. If the text does not exist yet,
     parses it, adds to data base and to file"""
 
-    with open("../data_base/Database.json", "r") as file:
-        content = json.load(file)
-        for key in content['data']['Songs']:
-            if key['artist'] == author and key['name'] == song:
-                if len(key['lyrics']) > 10:
-                    text_to_download = key['lyrics']
-            else:
-                text_to_download = fetch_lyrics(author, song)
-                # if the song is not in DB we save it there
-                add_song_text(author, song)
+    song_text = DataBase.select('Songs', artist=author, name=song)
+
+    if len(song_text[0]['lyrics']) > 10:
+        text_to_download = song_text[0]['lyrics']
+    else:
+        text_to_download = fetch_lyrics(author, song)
+        # if the song is not in DB we save it there
+        add_song_text(author, song)
 
     with open(f"{author}_{song}.txt", "w") as file:
         file.write(f'{text_to_download}')
