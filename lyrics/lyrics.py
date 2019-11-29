@@ -23,8 +23,8 @@ def add_song_text(author: str, song: str) -> Union[None or list]:
     """If a song exists in json file, adds text in key['lyrics']"""
 
     text = fetch_lyrics(author, song)
-    with open("../data_base/Database.json", "r") as file:
-        content = json.load(file)
+    with open("../data_base/Database.json", "r") as file_:
+        content = json.load(file_)
         for key in content['data']['Songs']:
             if key['artist'] == author and key['name'] == song:
                 key['lyrics'] = text
@@ -37,7 +37,7 @@ def add_song_text(author: str, song: str) -> Union[None or list]:
         json.dump(content, file1, indent=2)
 
 
-def to_file(author: str, song: str) -> None:
+def to_file(author: str, song: str, file_name: str) -> None:
 
     """Checks if the song is already in JSON file, copies song text
     and saves it to a .txt file. If the text does not exist yet,
@@ -52,17 +52,11 @@ def to_file(author: str, song: str) -> None:
         # if the song is not in DB we save it there
         add_song_text(author, song)
 
-    with open(f"{author}_{song}.txt", "w") as file:
-        file.write(f'{text_to_download}')
+    with open(f"{file_name}", "w") as file_:
+        file_.write(f'{text_to_download}')
 
 
 if __name__ == "__main__":
-    to_file('Nirvana', 'In Bloom')
-    to_file('Adele', 'Hello')
-    to_file('Nirvana', 'Lithium')
-    add_song_text('Adele', 'Hello')
-    add_song_text('Nirvana', 'In Bloom')
-
     parser = argparse.ArgumentParser()
 
     parser.add_argument('-a',
@@ -74,13 +68,10 @@ if __name__ == "__main__":
                         type=str,
                         default=None)
     parser.add_argument('-f',
-                        '--to_file',
-                        type=str,
-                        default=None)
-    parser.add_argument('-d', '--to_db',
+                        '--file_name',
                         type=str,
                         default=None)
 
     args = parser.parse_args()
 
-    # TODO - change parameters in final version to args.
+    to_file(args.artist, args.song, args.file_name)
