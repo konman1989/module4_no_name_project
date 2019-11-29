@@ -4,7 +4,7 @@ import requests
 from bs4 import BeautifulSoup
 
 
-def fetch_lyrics(author, song):
+def fetch_lyrics(author: str, song: str) -> str:
     author = author.replace(" ", "-")
     song = song.replace(" ", "-")
     url = f'https://genius.com/{author}-{song}-lyrics'
@@ -16,9 +16,9 @@ def fetch_lyrics(author, song):
     return content
 
 
-def add_song_text(author, song):
+def add_song_text(author: str, song: str):
 
-    """If a song exists in json file, adds text in key['Lyrics']"""
+    """If a song exists in json file, adds text in key['lyrics']"""
 
     text = fetch_lyrics(author, song)
     with open("../data_base/Database.json", "r") as file:
@@ -26,12 +26,16 @@ def add_song_text(author, song):
         for key in content['data']['Songs']:
             if key['artist'] == author and key['name'] == song:
                 key['lyrics'] = text
+                # breaks the loop if the song was found
+                break
+            else:
+                return []
 
     with open("../data_base/Database.json", "w") as file1:
         json.dump(content, file1, indent=2)
 
 
-def to_file(author, song):
+def to_file(author: str, song: str):
 
     """Checks if the song is already in JSON file, copies song text
     and saves it to a .txt file. If the text does not exist yet,
@@ -53,10 +57,11 @@ def to_file(author, song):
 
 
 if __name__ == "__main__":
-    to_file('Nirvana', 'In Bloom')
-    to_file('Adele', 'Hello')
-    add_song_text('Adele', 'Hello')
-    add_song_text('Nirvana', 'In Bloom')
+#     to_file('Nirvana', 'In Bloom')
+#     to_file('Adele', 'Hello')
+#     add_song_text('Adele', 'Hello')
+    print(add_song_text('Adedddle', 'Hedddllo'))
+    # print(add_song_text('Nirvana', 'In Bloom'))
 
     parser = argparse.ArgumentParser()
 
