@@ -2,6 +2,7 @@ import argparse
 import json
 import requests
 from bs4 import BeautifulSoup
+from typing import Union
 
 
 def fetch_lyrics(author: str, song: str) -> str:
@@ -16,7 +17,7 @@ def fetch_lyrics(author: str, song: str) -> str:
     return content
 
 
-def add_song_text(author: str, song: str):
+def add_song_text(author: str, song: str) -> Union[None or list]:
 
     """If a song exists in json file, adds text in key['lyrics']"""
 
@@ -28,14 +29,14 @@ def add_song_text(author: str, song: str):
                 key['lyrics'] = text
                 # breaks the loop if the song was found
                 break
-            else:
-                return []
+        else:
+            return []
 
     with open("../data_base/Database.json", "w") as file1:
         json.dump(content, file1, indent=2)
 
 
-def to_file(author: str, song: str):
+def to_file(author: str, song: str) -> None:
 
     """Checks if the song is already in JSON file, copies song text
     and saves it to a .txt file. If the text does not exist yet,
@@ -57,11 +58,11 @@ def to_file(author: str, song: str):
 
 
 if __name__ == "__main__":
-#     to_file('Nirvana', 'In Bloom')
-#     to_file('Adele', 'Hello')
-#     add_song_text('Adele', 'Hello')
-    print(add_song_text('Adedddle', 'Hedddllo'))
-    # print(add_song_text('Nirvana', 'In Bloom'))
+    to_file('Nirvana', 'In Bloom')
+    to_file('Adele', 'Hello')
+    to_file('Nirvana', 'Lithium')
+    add_song_text('Adele', 'Hello')
+    add_song_text('Nirvana', 'In Bloom')
 
     parser = argparse.ArgumentParser()
 

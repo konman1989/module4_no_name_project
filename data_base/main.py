@@ -68,6 +68,8 @@ class DataBase:
                     new_list.append(el)
                 for fil in filters.items():
                     if fil[1] != el[fil[0]]:
+                        if el in new_list:
+                            new_list.remove(el)
                         break
                     elif el not in new_list:
                         new_list.append(el)
@@ -83,11 +85,13 @@ class DataBase:
 
 if __name__ == "__main__":
     DB = DataBase()
-    DB.add_tables('Songs', {'id': 'int', 'name': 'str', 'lyrics': 'str'})
-    DB.add_data('Songs', {'name': 'Nobody', 'lyrics': 'test'})
-    DB.add_data('Songs', {'name': 'No Plan', 'lyrics': 'test'})
-    DB.add_data('Songs', {'name': 'Almost', 'lyrics': 'test'})
-    DB.add_data('Songs', {'name': 'Jackie and Wilson', 'lyrics': 'test'})
-    DB.add_data('Songs', {'name': 'Cherry Wine', 'lyrics': 'test'})
-    DB.add_data('Songs', {'name': 'R U Mine?', 'lyrics': 'test'})
-    print(DB.select('Songs', name='Cherry Wine', lyrics='test'))
+    DB.add_tables('Songs', {'id': 'int', 'artist': 'str', 'name': 'str', 'lyrics': 'str'})
+    DB.add_data('Songs', {'artist': 'Nirvana', 'name': 'In Bloom', 'lyrics': 'test'})
+    DB.add_data('Songs', {'artist': 'Adele', 'name': 'Hello', 'lyrics': 'test'})
+    DB.add_data('Songs', {'artist': 'Nirvana', 'name': 'Lithium', 'lyrics': 'test'})
+    DB.add_data('Songs', {'artist': 'None', 'name': 'Jackie and Wilson', 'lyrics': 'test'})
+    DB.add_data('Songs', {'artist': 'None', 'name': 'Cherry Wine', 'lyrics': 'test'})
+    DB.add_data('Songs', {'artist': 'None', 'name': 'R U Mine?', 'lyrics': 'test'})
+    print(DB.select('Songs', artist='Nirvana', name='In Bloom'))
+
+
