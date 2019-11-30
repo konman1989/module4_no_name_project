@@ -23,7 +23,7 @@ def add_song_text(author: str, song: str) -> Union[None or list]:
     """If a song exists in json file, adds text in key['lyrics']"""
 
     text = fetch_lyrics(author, song)
-    with open("../data_base/Database.json", "r") as file_:
+    with open("data_base/Database.json", "r") as file_:
         content = json.load(file_)
         for key in content['data']['Songs']:
             if key['artist'] == author and key['name'] == song:
@@ -33,7 +33,7 @@ def add_song_text(author: str, song: str) -> Union[None or list]:
         else:
             return []
 
-    with open("../data_base/Database.json", "w") as file1:
+    with open("data_base/Database.json", "w") as file1:
         json.dump(content, file1, indent=2)
 
 
@@ -75,3 +75,4 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     to_file(args.artist, args.song, args.file_name)
+
