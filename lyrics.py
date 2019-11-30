@@ -1,9 +1,13 @@
 import argparse
 import json
-import requests
-from data_base.main import DataBase
-from bs4 import BeautifulSoup
 from typing import Union
+
+import requests
+from bs4 import BeautifulSoup
+
+from data_base.main import DataBase
+
+
 
 
 def fetch_lyrics(author: str, song: str) -> str:
