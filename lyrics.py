@@ -1,6 +1,6 @@
 import argparse
 import json
-from typing import Union
+from typing import Optional
 
 import requests
 from bs4 import BeautifulSoup
@@ -20,7 +20,7 @@ def fetch_lyrics(author: str, song: str) -> str:
     return content
 
 
-def add_song_text(author: str, song: str) -> Union[None or list]:
+def add_song_text(author: str, song: str) -> Optional[list]:
 
     """If a song exists in json file, adds text in key['lyrics']"""
 
