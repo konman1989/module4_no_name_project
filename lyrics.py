@@ -8,8 +8,6 @@ from bs4 import BeautifulSoup
 from data_base.main import DataBase
 
 
-
-
 def fetch_lyrics(author: str, song: str) -> str:
     author = author.replace(" ", "-")
     song = song.replace(" ", "-")
